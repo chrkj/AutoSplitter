@@ -1,6 +1,5 @@
 #include "Walnut/Application.h"
 #include "Walnut/EntryPoint.h"
-
 #include "MenuLayer.h"
 
 Walnut::Application* Walnut::CreateApplication(int argc, char** argv)

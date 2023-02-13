@@ -14,12 +14,21 @@ public:
 
 	virtual void OnUIRender() override
 	{
-		ImGuiWindowFlags flags = ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoTitleBar;
-		ImGui::Begin("Main", 0, flags);
+		ImGui::Begin("Main", 0, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoTitleBar);
 
-		if (ImGui::Button("Connect"))
+		if (ImGui::Button(m_NetworkSocket->IsConnected() ? "Connected" : "Connect"))
 		{
-			m_NetworkSocket->TryConnect();
+			m_NetworkSocket->Connect();
+		}
+
+		if (ImGui::Button("Split"))
+		{
+			m_NetworkSocket->Split();
+		}
+
+		if (ImGui::Button("Reset"))
+		{
+			m_NetworkSocket->Reset();
 		}
 
 		ImGui::End();
