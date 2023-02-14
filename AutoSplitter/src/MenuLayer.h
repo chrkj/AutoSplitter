@@ -1,15 +1,21 @@
 #pragma once
 #include <thread>
+#include <comdef.h>
 
 #include "Walnut/Application.h"
 #include "NetworkSocket.h"
+#include "../GameProcess.h"
 
 class MenuLayer : public Walnut::Layer
 {
 public:
 	virtual void OnAttach() override
 	{
+		m_GameProcess = new GameProcess("Project64.exe");
 		m_NetworkSocket = new NetworkSocket("127.0.0.1", 16834);
+		m_GameProcess->GetProcessID();
+		m_GameProcess->GetBaseAddress();
+		m_GameProcess->GetHandle();
 	}
 
 	virtual void OnUIRender() override
@@ -31,8 +37,20 @@ public:
 			m_NetworkSocket->Reset();
 		}
 
+		if (ImGui::Button("Level"))
+		{
+			std::cout << m_GameProcess->ReadMemory(Offsets::LEVEL);
+		}
+
+		if (ImGui::Button("Star"))
+		{
+			std::cout << m_GameProcess->ReadMemory(Offsets::STAR);
+		}
+
+
 		ImGui::End();
 	}
 private:
+	GameProcess* m_GameProcess;
 	NetworkSocket* m_NetworkSocket;
 };
