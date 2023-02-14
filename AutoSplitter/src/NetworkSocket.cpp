@@ -16,7 +16,7 @@ void NetworkSocket::Split()
 	if (send(m_connection, message, strlen(message), 0) == -1)
 	{
 		m_isConnected = false;
-		std::cout << "Failed to send data to socket.";
+		std::cout << "Failed to send data to socket." << std::endl;
 	}
 }
 
@@ -26,7 +26,7 @@ void NetworkSocket::Reset()
 	if (send(m_connection, message, strlen(message), 0) == -1) 
 	{
 		m_isConnected = false;
-		std::cout << "Failed to send data to socket.";
+		std::cout << "Failed to send data to socket." << std::endl;
 	}
 }
 

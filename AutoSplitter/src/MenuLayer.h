@@ -3,16 +3,17 @@
 #include <comdef.h>
 
 #include "Walnut/Application.h"
+
+#include "GameProcess.h"
 #include "NetworkSocket.h"
-#include "../GameProcess.h"
 
 class MenuLayer : public Walnut::Layer
 {
 public:
 	virtual void OnAttach() override
 	{
-		m_GameProcess = new GameProcess("Project64.exe");
 		m_NetworkSocket = new NetworkSocket("127.0.0.1", 16834);
+		m_GameProcess = new GameProcess("Project64.exe");
 		m_GameProcess->GetProcessID();
 		m_GameProcess->GetBaseAddress();
 		m_GameProcess->GetHandle();
@@ -39,12 +40,12 @@ public:
 
 		if (ImGui::Button("Level"))
 		{
-			std::cout << m_GameProcess->ReadMemory(Offsets::LEVEL);
+			std::cout << m_GameProcess->ReadMemory(Offsets::LEVEL) << std::endl;
 		}
 
 		if (ImGui::Button("Star"))
 		{
-			std::cout << m_GameProcess->ReadMemory(Offsets::STAR);
+			std::cout << m_GameProcess->ReadMemory(Offsets::STAR) << std::endl;
 		}
 
 
