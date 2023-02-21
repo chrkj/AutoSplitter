@@ -1,7 +1,7 @@
 #include "NetworkSocket.h"
 
 NetworkSocket::NetworkSocket(const char* address, int port)
-	: m_address(address), m_port(port), m_connection(0), m_isConnected(false)
+	: m_Address(address), m_Port(port), m_Connection(0), m_IsConnected(false)
 {}
 
 void NetworkSocket::Connect()
@@ -13,9 +13,9 @@ void NetworkSocket::Connect()
 void NetworkSocket::Split()
 {
 	const char* message = "startorsplit\r\n";
-	if (send(m_connection, message, strlen(message), 0) == -1)
+	if (send(m_Connection, message, strlen(message), 0) == -1)
 	{
-		m_isConnected = false;
+		m_IsConnected = false;
 		std::cout << "Failed to send data to socket." << std::endl;
 	}
 }
@@ -23,9 +23,9 @@ void NetworkSocket::Split()
 void NetworkSocket::Reset()
 {
 	const char* message = "reset\r\n";
-	if (send(m_connection, message, strlen(message), 0) == -1) 
+	if (send(m_Connection, message, strlen(message), 0) == -1) 
 	{
-		m_isConnected = false;
+		m_IsConnected = false;
 		std::cout << "Failed to send data to socket." << std::endl;
 	}
 }
@@ -36,7 +36,7 @@ void NetworkSocket::TryConnect()
 	WORD DllVersion = MAKEWORD(2, 1);
 	if (WSAStartup(DllVersion, &wsaData) != 0) 
 	{
-		m_isConnected = false;
+		m_IsConnected = false;
 		std::cout << "Winsock Connection Failed!" << std::endl;
 	}
 
@@ -46,10 +46,10 @@ void NetworkSocket::TryConnect()
 	addr.sin_port = htons(16834);
 	addr.sin_family = AF_INET;
 
-	m_connection = socket(AF_INET, SOCK_STREAM, NULL);
-	if (connect(m_connection, (SOCKADDR*)&addr, addrLen) == 0) 
+	m_Connection = socket(AF_INET, SOCK_STREAM, NULL);
+	if (connect(m_Connection, (SOCKADDR*)&addr, addrLen) == 0) 
 	{
-		m_isConnected = true;
+		m_IsConnected = true;
 		std::cout << "Connected!" << std::endl;
 	}
 	else
@@ -60,5 +60,5 @@ void NetworkSocket::TryConnect()
 
 bool NetworkSocket::IsConnected()
 {
-	return m_isConnected;
+	return m_IsConnected;
 }

@@ -19,9 +19,9 @@ public:
 	short ReadMemory(unsigned int offset);
 
 private:
-	const char* m_processName;
-	DWORD m_processId;
-	BYTE* m_baseAddress;
-	HANDLE m_processHandle;
+	const char* m_ProcessName;
+	DWORD m_ProcessId;
+	BYTE* m_BaseAddress;
+	HANDLE m_ProcessHandle;
 };
 

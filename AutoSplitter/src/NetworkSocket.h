@@ -16,9 +16,9 @@ public:
 	bool IsConnected();
 
 private:
-	int m_port;
-	const char* m_address;
-	SOCKET m_connection;
-	bool m_isConnected;
+	int m_Port;
+	const char* m_Address;
+	SOCKET m_Connection;
+	bool m_IsConnected;
 };
 
