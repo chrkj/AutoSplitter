@@ -1,7 +1,7 @@
 #pragma once
+#include <iostream>
 #include <Windows.h>
 #include <TlHelp32.h>
-#include <iostream>
 
 enum Offsets
 {
@@ -13,15 +13,21 @@ class GameProcess
 {
 public:
 	GameProcess(const char* processName);
-	void GetProcessID();
-	void GetBaseAddress();
-	void GetHandle();
-	short ReadMemory(unsigned int offset);
+	void Update();
+	
+public:
+	int Stars;
+	int CurLevel;
 
 private:
-	const char* m_ProcessName;
+	short ReadMemory(unsigned int offset);
+	void GetHandle();
+	void GetProcessID();
+
+private:
 	DWORD m_ProcessId;
 	BYTE* m_BaseAddress;
 	HANDLE m_ProcessHandle;
+	const char* m_ProcessName;
 };
 
