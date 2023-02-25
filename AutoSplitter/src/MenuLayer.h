@@ -17,15 +17,15 @@ public:
 	virtual void OnAttach() override
 	{
 		GUI::SetStyle();
-		m_SplitManager = std::make_shared<SplitManager>();
 		m_GameProcess = std::make_shared<GameProcess>("Project64.exe");
 		m_NetworkSocket = std::make_shared<NetworkSocket>("127.0.0.1", 16834);
+		m_SplitManager = std::make_shared<SplitManager>();
 	}
 
 	virtual void OnUIRender() override
 	{
 		m_GameProcess->Update();
-		m_SplitManager->Update();
+		m_SplitManager->Update(m_NetworkSocket.get(), m_GameProcess.get());
 
 		ImGui::Begin("Main", 0, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoTitleBar);
 
